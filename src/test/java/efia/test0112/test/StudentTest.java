@@ -25,7 +25,7 @@ public class StudentTest {
 
     @Test
     public void test01test() {
-        System.out.println("test2");
+        System.out.println("test3");
     }
     
 //    @Test
