@@ -28,12 +28,13 @@ public class StudentTest {
         System.out.println("test3");
     }
     
-//    @Test
-//    public void test01addStudent() {
-//        Student student = new Student("test", 18);
-//        int row = studentService.addStudent(student);
-//        System.out.println("row = " + row);
-//    }
+    @Test
+    public void test01addStudent() {
+        Student student = new Student("test", 18);
+        int row = studentService.addStudent(student);
+        System.out.println("row = " + row);
+//    	System.out.println("123");
+    }
 //
 //    @Test
 //    public void test02addStudents() {
