@@ -4,7 +4,7 @@
 <html lang="zh-tw">
 <body>
 <h2>醫療保險區塊鏈</h2>
-<p><a href="${pageContext.request.contextPath}/TEST0112F1/list.do">顯示數值</a></p>
+<p><a href="${pageContext.request.contextPath}/NCCU110W/showValue.do">顯示數值</a></p>
 <p><a href="${pageContext.request.contextPath}/TEST0112F1/list.do">加入數值</a></p>
 <p><a href="${pageContext.request.contextPath}/TEST0112F1/list.do">保險公司受理/拒絕保單</a></p>
 <p><a href="${pageContext.request.contextPath}/TEST0112F1/list.do">投保人繳保費</a></p>

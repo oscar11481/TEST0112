@@ -11,9 +11,12 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.http.HttpService;
 
 import efia.test0112.entity.Student;
 import efia.test0112.service.StudentService;
+import efia.test0112.service.NccuWeb3jService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:application-context.xml" })
@@ -22,9 +25,12 @@ public class StudentTest {
 
     @Autowired
     private StudentService studentService;
+    private NccuWeb3jService nccuWeb3jService;
 
     @Test
     public void test01test() {
+//    	Web3j web3j = Web3j.build(new HttpService("http://localhost:7545/"));
+//    	nccuWeb3jService.printWeb3Version(web3j);
         System.out.println("test3");
     }
     

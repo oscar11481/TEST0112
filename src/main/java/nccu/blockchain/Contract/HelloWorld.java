@@ -1,4 +1,4 @@
-package nccu.blockchain.Web3jTest;
+package nccu.blockchain.Contract;
 
 import java.math.BigInteger;
 import java.util.Arrays;
