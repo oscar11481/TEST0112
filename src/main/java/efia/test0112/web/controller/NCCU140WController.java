@@ -1,7 +1,5 @@
 package efia.test0112.web.controller;
 
-import java.math.BigInteger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,8 +15,8 @@ import org.web3j.protocol.http.HttpService;
 import efia.test0112.entity.Student;
 import efia.test0112.service.NccuWeb3jService;
 @Controller
-@RequestMapping("/NCCU110W")
-public class NCCU110WController {
+@RequestMapping("/NCCU140W")
+public class NCCU140WController {
 	// ganache連線位址
 	private final static String ganacheNode = "http://localhost:7545/";
 	
@@ -27,7 +25,7 @@ public class NCCU110WController {
 			"40a763b2512bceff7ca50b506a4ca3b308b091c114044c3e5946bf1da16c5517";
 	//醫院EOA PRIVATE_KEY
 	private final static String HOSPITAL_PRIVATE_KEY = 
-			"30264f99c3d0a5082a8a43698753adc6179a696bb5034ce16b22964ecde675de";
+			"";
 	//投保人EOA PRIVATE_KEY
 	private final static String PATIENT_PRIVATE_KEY = 
 			"";  
@@ -46,64 +44,28 @@ public class NCCU110WController {
 	
     @RequestMapping("/home")
     public String home() {
-        return "NCCU/NCCU110W";
+        return "NCCU/NCCU140W";
     }
     
-	//醫療保險合約上鏈
-	@RequestMapping("/deployInsuranceContract")
-	public String deployInsuranceContract() throws Exception {
-		Web3j web3j = Web3j.build(new HttpService(ganacheNode));
-		String InsuranceContractAddress=  nccuWeb3jService.deployInsuranceContract(web3j, 
-				nccuWeb3jService.getCredentialsFromPrivateKey(INSURANCECORP_PRIVATE_KEY));
-		String SimpleStorageContractAddress=  nccuWeb3jService.deploySimpleStorageContract(web3j, 
-				nccuWeb3jService.getCredentialsFromPrivateKey(INSURANCECORP_PRIVATE_KEY));
-		System.out.println("醫療保險合約位址：" + InsuranceContractAddress);	
-		System.out.println("測試用合約位址：" + SimpleStorageContractAddress);
-		return "NCCU/NCCU110W";
-	}
-	
-	@RequestMapping("/showValue")
-	public String showValue() throws Exception {
-		
-//		System.out.println(nccuWeb3jService.showValue());
-		
-		return "NCCU/NCCU110W";
-//		return "TEST0112F1/reqForm";
-//		return "forward:/TEST0112F1/listEmployeeByQuery.do";
-	}
-	
-	@RequestMapping("/checkReport")
-	public String checkReport(HttpServletRequest request, HttpServletResponse response) {
-		
-		return null;
-	}
-	
-    @RequestMapping("/addInsurance")
-    public String addInsurance(HttpServletRequest request) throws Exception {
+    @RequestMapping("/insRecord")
+    public String insRecord(HttpServletRequest request) throws Exception {
     	Web3j web3j = Web3j.build(new HttpService(ganacheNode));
     	Credentials credentials = nccuWeb3jService.getCredentialsFromPrivateKey(INSURANCECORP_PRIVATE_KEY);
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-//        Integer age = Integer.parseInt(request.getParameter("age"));
-        String rdoMode = request.getParameter("rdoMode");
+        String PATIENT_EOA = request.getParameter("EOA");
+        String symptom = request.getParameter("symptom");
+        String cause = request.getParameter("cause");
+        Integer day = Integer.parseInt(request.getParameter("day"));
+        Integer money = 10; //ETHER        
         String privateKey_from_http = request.getParameter("privateKey");
         Credentials credentials_from_http = nccuWeb3jService.getCredentialsFromPrivateKey(privateKey_from_http);
-        //確認有無重複投保
-        if(nccuWeb3jService.checkInsuranceContract(web3j, 
-        		credentials, credentials_from_http.getAddress())==true){
-        	return "forward:/NCCU110W/errorReport.do?message=" + "撥款/扣款帳戶重複，請確認是否重複投保";
-        }
-        //投保人付保費
-        nccuWeb3jService.transferETH(web3j, credentials_from_http, credentials.getAddress(), "1");
-        //投保
-        nccuWeb3jService.Insured(web3j, 
-        		credentials, 
-        		credentials_from_http.getAddress(), 
-        		name, 
-        		address);
-        return "forward:/NCCU110W/infoReport.do?message=" + "本保險公司已受理您的投保，投保類型為：防疫​保單";
+        String HospitalEOA = nccuWeb3jService.getHospitalEOA(web3j, credentials).toLowerCase();
+        if(credentials_from_http.getAddress().toLowerCase().equals(HospitalEOA)==false){
+        	return "forward:/NCCU140W/errorReport.do?message=" + "此功能限制醫療院所才能使用，請確認帳戶是否正確";
+        }        
+        nccuWeb3jService.insRecord(web3j, credentials, PATIENT_EOA, symptom, cause, day, money);
+        return "forward:/NCCU140W/infoReport.do?message=" + "已新增病歷";
     }
-	
+    
     @RequestMapping("/errorReport")
     public ModelAndView errorReport(@RequestParam("message") String message, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView(); 
@@ -111,7 +73,7 @@ public class NCCU110WController {
         mav.setViewName("common/errorReport");
         return mav;
     }
-    
+	
     @RequestMapping("/infoReport")
     public ModelAndView infoReport(@RequestParam("message") String message, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView(); 
