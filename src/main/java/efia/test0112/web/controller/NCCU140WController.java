@@ -18,11 +18,11 @@ import efia.test0112.service.NccuWeb3jService;
 @RequestMapping("/NCCU140W")
 public class NCCU140WController {
 	// ganache連線位址
-	private final static String ganacheNode = "http://localhost:7545/";
+	private final static String ganacheNode = "http://localhost:8545/";
 	
 	//保險公司EOA PRIVATE_KEY
 	private final static String INSURANCECORP_PRIVATE_KEY = 
-			"40a763b2512bceff7ca50b506a4ca3b308b091c114044c3e5946bf1da16c5517";
+			"84f8490c4898728c5f0839c7cac0646ef17b4236e5acc9f32cf4eeb3c4418644";
 	//醫院EOA PRIVATE_KEY
 	private final static String HOSPITAL_PRIVATE_KEY = 
 			"";
@@ -37,7 +37,7 @@ public class NCCU140WController {
 			"0x4d7E921f70dA4C6b573A11Cd2ECbd0d066988356";
 	//醫療保險合約位址
 	private final static String INSURANCE_CONTRACT_ADDRESS = 
-			"0x529f0C9D137132666f46586d5A672094Dd7B00a9";
+			"0xCfF3f74f36ad6eE8c63c8dD9F39674B9BC1967C1";
 	
 	@Autowired
 	private NccuWeb3jService nccuWeb3jService;

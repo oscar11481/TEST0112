@@ -35,9 +35,9 @@ import rx.functions.Action1;
 
 @Service("nccuWeb3jService")
 public class NccuWeb3jServiceImpl implements NccuWeb3jService{
-  private final static String ganacheNode = "http://localhost:7545/";
+  private final static String ganacheNode = "http://localhost:8545/";
   private final static String INSURANCECORP_PRIVATE_KEY   = 
-		  "40a763b2512bceff7ca50b506a4ca3b308b091c114044c3e5946bf1da16c5517";
+		  "84f8490c4898728c5f0839c7cac0646ef17b4236e5acc9f32cf4eeb3c4418644";
   private final static BigInteger GAS_LIMIT = BigInteger.valueOf(6721975L);
   private final static BigInteger GAS_PRICE = BigInteger.valueOf(20000000000L); // L being long; capital for clarity   
   //測試合約位址
@@ -45,7 +45,7 @@ public class NccuWeb3jServiceImpl implements NccuWeb3jService{
 		  "0x4d7E921f70dA4C6b573A11Cd2ECbd0d066988356";
   //醫療保險合約位址
   private final static String INSURANCE_CONTRACT_ADDRESS = 
-		  "0x529f0C9D137132666f46586d5A672094Dd7B00a9";
+		  "0xCfF3f74f36ad6eE8c63c8dD9F39674B9BC1967C1";
   //顯示版本
 	public String printWeb3Version(Web3j web3j) {
 		Web3ClientVersion web3ClientVersion = null;
