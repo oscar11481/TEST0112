@@ -37,7 +37,7 @@ import rx.functions.Action1;
 public class NccuWeb3jServiceImpl implements NccuWeb3jService{
   private final static String ganacheNode = "http://localhost:8545/";
   private final static String INSURANCECORP_PRIVATE_KEY   = 
-		  "84f8490c4898728c5f0839c7cac0646ef17b4236e5acc9f32cf4eeb3c4418644";
+		  "548d8f9f944db3be95657d38d98bf664963a8f97fa89844098299c56ed320eca";
   private final static BigInteger GAS_LIMIT = BigInteger.valueOf(6721975L);
   private final static BigInteger GAS_PRICE = BigInteger.valueOf(20000000000L); // L being long; capital for clarity   
   //測試合約位址
@@ -45,7 +45,7 @@ public class NccuWeb3jServiceImpl implements NccuWeb3jService{
 		  "0x4d7E921f70dA4C6b573A11Cd2ECbd0d066988356";
   //醫療保險合約位址
   private final static String INSURANCE_CONTRACT_ADDRESS = 
-		  "0xCfF3f74f36ad6eE8c63c8dD9F39674B9BC1967C1";
+		  "0x407d3F38595A348ee0D5712950226990f77a4088";
   //顯示版本
 	public String printWeb3Version(Web3j web3j) {
 		Web3ClientVersion web3ClientVersion = null;
@@ -214,21 +214,27 @@ public class NccuWeb3jServiceImpl implements NccuWeb3jService{
 		String PATIENT_EOA = ""; // 病患EOA
 		BigInteger recordInx = BigInteger.ZERO; // 病歷序號
 		BigInteger days = BigInteger.ZERO; // 住院天數
-		BigInteger money = BigInteger.ZERO; // 住院金額	
+		BigInteger money = BigInteger.ZERO; // 理賠金額(單價)	
+		BigInteger ClaimPayment = BigInteger.ZERO; //理賠金額
 		for (Type type : nonIndexedValues) {
 			if (inx == 0) PATIENT_EOA = Numeric.toHexStringWithPrefix((BigInteger) type.getValue());//病患EOA		
 			if (inx == 1) recordInx = (BigInteger) type.getValue();//病歷序號		
 			if (inx == 2) days = (BigInteger) type.getValue();//住院天數
-			if (inx == 3) money = (BigInteger) type.getValue();//理賠金額
+//			if (inx == 3) ClaimPayment = (BigInteger) type.getValue();//理賠基數
+			if (inx == 3) money = (BigInteger) type.getValue();//理賠金額(單價)
+			
 			inx++;
 		}	
 		System.out.println("保險受益人:" + PATIENT_EOA);
 		System.out.println("病歷序號:" + recordInx.longValueExact());
 		System.out.println("住院天數:" + days.longValueExact());
+//		System.out.println("理賠基數:" + ClaimPayment.longValueExact());
 		System.out.println("住院金額:" + money.longValueExact());
 		
-		// 撥款理賠金(住院天數*住院金額)
-		transferETH(web3j, credentials, PATIENT_EOA, "" +days.multiply(money).longValueExact());//ETHER
+		//(理賠基數*單價)
+//		transferETH(web3j, credentials, PATIENT_EOA, "" +
+//					ClaimPayment.multiply(new BigInteger("10")).longValueExact());//ETHER 
+		transferETH(web3j, credentials, PATIENT_EOA, "" +days.multiply(money).longValueExact());//ETHER		
 		
 	}
 

@@ -1,13 +1,12 @@
 package efia.test0112.test;
 
-import static org.junit.Assert.*;
+import java.math.BigInteger;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.web3j.crypto.Credentials;
@@ -16,19 +15,6 @@ import org.web3j.protocol.http.HttpService;
 
 import efia.test0112.service.NccuWeb3jService;
 import nccu.blockchain.Contract.InsuranceContract;
-import nccu.blockchain.Contract.SimpleStorage;
-
-import java.io.File;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-
-import javax.xml.bind.JAXBException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:application-context.xml" })
@@ -40,13 +26,13 @@ public class NccuWeb3jTest {
 	
 	//保險公司EOA PRIVATE_KEY
 	private final static String INSURANCECORP_PRIVATE_KEY = 
-			"84f8490c4898728c5f0839c7cac0646ef17b4236e5acc9f32cf4eeb3c4418644";
+			"548d8f9f944db3be95657d38d98bf664963a8f97fa89844098299c56ed320eca";
 	//醫院EOA PRIVATE_KEY
 	private final static String HOSPITAL_PRIVATE_KEY = 
-			"30264f99c3d0a5082a8a43698753adc6179a696bb5034ce16b22964ecde675de";
+			"0289f277d9fa455806f3be6065b8d3db20575a111560e1c6f04418c0e304a1f5";
 	//投保人EOA PRIVATE_KEY
 	private final static String PATIENT_PRIVATE_KEY = 
-			"0f000f4329ca4690faed4d2800607cf6e80d445370a39e960601e401b44ac35e";  
+			"bbb99c7ee94f17c5dd240ec219beb7212d5e73753daa48962e079830619505e4";  
 	//政府EOA PRIVATE_KEY
 	private final static String GOVERNMENT_PRIVATE_KEY = 
 			""; 
@@ -55,7 +41,7 @@ public class NccuWeb3jTest {
 		    "0x4d7E921f70dA4C6b573A11Cd2ECbd0d066988356";
     //醫療保險合約位址
     private final static String INSURANCE_CONTRACT_ADDRESS = 
-		    "0xCfF3f74f36ad6eE8c63c8dD9F39674B9BC1967C1";
+		    "0x407d3F38595A348ee0D5712950226990f77a4088";
     
     @Autowired
     private NccuWeb3jService nccuWeb3jService;
@@ -186,5 +172,9 @@ public class NccuWeb3jTest {
 		BigInteger test =days.multiply(money);
 		System.out.println(test.toString());
 	}
-	
+	//測試IPFS讀取
+	@Test
+	public void test_ipfs() throws Exception {   
+
+	}
 }

@@ -1,18 +1,15 @@
 package efia.test0112.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 
-import efia.test0112.entity.Student;
 import efia.test0112.service.NccuWeb3jService;
 @Controller
 @RequestMapping("/NCCU150W")
@@ -22,7 +19,7 @@ public class NCCU150WController {
 	
 	//保險公司EOA PRIVATE_KEY
 	private final static String INSURANCECORP_PRIVATE_KEY = 
-			"84f8490c4898728c5f0839c7cac0646ef17b4236e5acc9f32cf4eeb3c4418644";
+			"548d8f9f944db3be95657d38d98bf664963a8f97fa89844098299c56ed320eca";
 	//醫院EOA PRIVATE_KEY
 	private final static String HOSPITAL_PRIVATE_KEY = 
 			"";
@@ -37,7 +34,7 @@ public class NCCU150WController {
 			"0x4d7E921f70dA4C6b573A11Cd2ECbd0d066988356";
 	//醫療保險合約位址
 	private final static String INSURANCE_CONTRACT_ADDRESS = 
-			"0xCfF3f74f36ad6eE8c63c8dD9F39674B9BC1967C1";
+			"0x407d3F38595A348ee0D5712950226990f77a4088";
 	
 	@Autowired
 	private NccuWeb3jService nccuWeb3jService;
